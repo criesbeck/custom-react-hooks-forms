@@ -4,9 +4,10 @@
   "private": true,
   "dependencies": {
     "bulma": "^0.7.4",
+    "rbx": "^2.2.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "react-scripts": "2.1.5"
+    "react-scripts": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
