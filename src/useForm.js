@@ -1,24 +1,16 @@
 import { useState } from 'react';
 
-const useForm = (initialValues, callback) => {
+const useForm = (names) => {
 
-  const [values, setValues] = useState(initialValues);
-
-  const handleSubmit = (event) => {
-    if (event) event.preventDefault();
-      callback();
-  };
+  const [values, setValues]
+     = useState(Object.fromEntries(names.map(name => [name, ''])));
 
   const handleChange = (event) => {
-    event.persist();
-    setValues(values => ({ ...values, [event.target.name]: event.target.value }));
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
   };
 
-  return {
-    handleChange,
-    handleSubmit,
-    values,
-  }
+  return [ values, handleChange ];
 };
 
 export default useForm;

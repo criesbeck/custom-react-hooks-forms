@@ -4,9 +4,10 @@ import { Button, Column, Container, Control, Field, Input, Section } from 'rbx';
 import useForm from "./useForm";
 
 const Form = () => {
-  const { values, handleChange, handleSubmit } = useForm({email: '', password: ''}, login);
+  const [ values, handleChange,] = useForm(['email', 'password']);
 
-  function login() {
+  function login(event) {
+    event.preventDefault();
     console.log(values);
   }
 
@@ -15,7 +16,7 @@ const Form = () => {
       <Container>
         <Column.Group>
           <Column size={4} offset={4}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={login}>
               <Field>
                 <Control>
                   <Input type="email" placeholder="Email" name="email" onChange={handleChange} value={values.email} required />
