@@ -3,7 +3,7 @@ import { useState } from 'react';
 const useForm = (names) => {
 
   const [values, setValues]
-     = useState(Object.fromEntries(names.map(name => [name, ''])));
+  = useState(names.reduce((obj, name) => ({...obj, [name]: ''}), {}));
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
