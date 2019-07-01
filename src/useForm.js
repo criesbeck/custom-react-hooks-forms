@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-const useForm = (names) => {
+const useForm = (names, inits) => {
 
   const [values, setValues]
-  = useState(names.reduce((obj, name) => ({...obj, [name]: ''}), {}));
+  = useState(names.reduce((obj, name) => ({...obj, [name]: (inits || {})[name] || ''}), {}));
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;

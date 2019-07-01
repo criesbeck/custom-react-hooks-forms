@@ -1,10 +1,13 @@
 import React from 'react';
 import "rbx/index.css";
-import { Button, Checkbox, Column, Container, Control, Field, Input, Label, Section } from 'rbx';
+import { Button, Checkbox, Column, Container, Control, Field, Input, Label, Section, Select } from 'rbx';
 import useForm from "./useForm";
 
 const Form = () => {
-  const [ values, handleChange,] = useForm(['email', 'password', 'human']);
+  const [values, handleChange] = useForm(
+    ['email', 'password', 'human', 'homeworld'],
+    { homeworld: 'Earth' },
+    );
 
   function login(event) {
     event.preventDefault();
@@ -30,14 +33,30 @@ const Form = () => {
               <Field>
                 <Control>
                   <Label>
-                    <Checkbox name="human" onChange={handleChange} checked={values.human} />
+                    <Checkbox id="human" name="human" onChange={handleChange} checked={values.human} required />
                     I am not a robot.
                   </Label>
                 </Control>
               </Field>
               <Field>
                 <Control>
-                  <Button type="submit" color="primary" disabled={!values.human}>Submit</Button>
+                  <Select.Container>
+                    <Select name="homeworld" onChange={handleChange} value={values.homeworld}
+                      required pattern="">
+                      <Select.Option value=''>Homeworld...</Select.Option>
+                        {
+                          ['Mercury', 'Venus', 'Mars', 'Earth', 'Jupiter', 
+                           'Saturn', 'Neptune', 'Uranus'].map(w => (
+                            <Select.Option key={w} value={w}>{w}</Select.Option>
+                           ))
+                        }
+                    </Select>
+                  </Select.Container>
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Button type="submit" color="primary" >Submit</Button>
                 </Control>
               </Field>
             </form>
